@@ -10,3 +10,4 @@ sqlalchemy
 pandas
 python-dotenv
 tqdm
+pinecone
