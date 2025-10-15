@@ -1,0 +1,12 @@
+streamlit
+requests
+newspaper3k
+transformers
+sentence-transformers
+faiss-cpu
+langchain
+openai
+sqlalchemy
+pandas
+python-dotenv
+tqdm
