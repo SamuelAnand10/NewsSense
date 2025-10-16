@@ -119,7 +119,7 @@ def refresh_vector_db(articles):
     store_articles(articles, index)
     print(f"✅ {len(articles)} articles refreshed in Pinecone.")
 
-def search_articles(query: str, top_k: int):
+def search_articles(query: str, top_k: int = 10):
     """
     Finds the top_k most relevant articles for a given query.
     Returns a list of matched metadata (title, description).

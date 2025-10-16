@@ -31,15 +31,15 @@ def answer_question(question: str, top_k: int = 10):
         )
 
     prompt = f"""
-You are a helpful news assistant. Using the following news articles, answer the question below.
+             are a helpful news assistant. Using the following news articles, answer the question below.
 
-News Articles:
-{context_text}
+            News Articles:
+            {context_text}
 
-Question: {question}
+            Question: {question}
 
-Answer based only on the articles above. If the articles don't contain the answer, say "I don't know based on the available articles."
-"""
+            Answer based only on the articles above. If the articles don't contain the answer, say "I don't know based on the available articles."
+            """
 
     # GPT call
     response = client.chat.completions.create(
