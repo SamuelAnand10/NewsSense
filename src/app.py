@@ -94,8 +94,15 @@ if "articles" not in st.session_state:
     st.session_state.articles = []
 
 # -------------------- HEADER --------------------
-st.title("NewsSense — Daily News Summaries")
-st.caption("Stay informed with concise summaries and smart insights.")
+# -------------------- HEADER --------------------
+st.markdown(
+    """
+    <h1 class='app-title'>📰 NewsSense — Daily News Summaries</h1>
+    <p class='app-caption'>Stay informed with concise summaries and smart insights.</p>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # -------------------- FETCH NEWS --------------------
 if refresh_news:
