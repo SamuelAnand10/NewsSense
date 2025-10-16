@@ -13,23 +13,24 @@ st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 st.markdown(
     """
     <style>
-    /* Import fonts from Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:ital,wght@0,900&display=swap');
 
-    /* Set default font for the whole app */
-    html, body, [class*="css"]  {
+    /* Default text font */
+    html, body, [class*="css"] {
         font-family: 'Manrope', sans-serif;
-        background-color: #1e1e1e;  /* dark mode background */
-        color: #e0e0e0;  /* light text for dark mode */
+        background-color: #1e1e1e;  /* dark mode */
+        color: #e0e0e0;
     }
 
-    /* Headings (H1, H2, H3...) use Playfair Display */
-    h1, h2, h3, h4, h5, h6 {
+    /* App Title / Headings */
+    h1, h2, h3 {
         font-family: 'Playfair Display', serif;
+        font-weight: 900;  /* bold / black style */
+        letter-spacing: 1px;
         color: #ffffff;
     }
 
-    /* Style chat bubbles */
+    /* Chat bubbles */
     .user-bubble {
         background-color: #3a3a3a;
         color: #f1f1f1;
@@ -54,12 +55,6 @@ st.markdown(
         font-family: 'Manrope', sans-serif;
     }
 
-    /* Expander headers (for summaries) */
-    .streamlit-expanderHeader {
-        font-family: 'Playfair Display', serif;
-        color: #ffd700;  /* golden accent */
-    }
-
     /* Buttons */
     .stButton>button {
         background-color: #4a4aff;
@@ -72,6 +67,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
