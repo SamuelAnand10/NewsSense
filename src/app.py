@@ -15,25 +15,57 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:ital,wght@0,900&display=swap');
 
-    /* App Title / Headings */
-    .app-title {
-        font-family: 'Playfair Display';
-        font-weight: 900;  /* bold / black style */
-        letter-spacing: 1px;
-        color: #ffffff;
-        font-size: 3em;  /* increase as needed */
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Body text */
+    /* ---------- BODY / BACKGROUND ---------- */
     html, body, [class*="css"] {
-        font-family: 'Manrope';
+        font-family: 'Manrope', sans-serif;
         background-color: #1e1e1e;  /* dark mode */
         color: #e0e0e0;
     }
 
-    /* Chat bubbles */
+    /* ---------- APP TITLE / HEADINGS ---------- */
+    .app-title {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;  /* bold/black style */
+        letter-spacing: 1px;
+        color: #ffffff;
+        font-size: 3em;
+        text-align: center;
+        margin-bottom: 0.2em;
+    }
+
+    .app-caption {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 400;
+        font-size: 1.2em;
+        text-align: center;
+        color: #b0b0b0;
+        margin-bottom: 2em;
+    }
+
+    /* ---------- SUMMARY CARDS ---------- */
+    .summary-card {
+        background-color: #2a2a2a;
+        padding: 1em 1.2em;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        color: #f0f0f0;
+    }
+
+    .summary-card h4 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        margin-bottom: 0.5em;
+        color: #ffffff;
+    }
+
+    .summary-card p {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 400;
+        color: #d0d0d0;
+        margin: 0;
+    }
+
+    /* ---------- CHAT BUBBLES ---------- */
     .user-bubble {
         background-color: #3a3a3a;
         color: #f1f1f1;
@@ -43,7 +75,8 @@ st.markdown(
         text-align: right;
         width: fit-content;
         max-width: 45%;
-        font-family: 'Manrope';
+        font-family: 'Manrope', sans-serif;
+        margin-bottom: 10px;
     }
 
     .ai-bubble {
@@ -55,21 +88,61 @@ st.markdown(
         text-align: left;
         width: fit-content;
         max-width: 45%;
-        font-family: 'Manrope';
+        font-family: 'Manrope', sans-serif;
+        margin-bottom: 10px;
     }
 
-    /* Buttons */
+    /* ---------- CHAT SOURCES ---------- */
+    .chat-sources {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.9em;
+        color: #a0a0a0;
+        margin-left: 1em;
+    }
+
+    /* ---------- BUTTONS ---------- */
     .stButton>button {
         background-color: #4a4aff;
         color: #fff;
-        font-family: 'Manrope';
+        font-family: 'Manrope', sans-serif;
+        font-weight: 600;
         border-radius: 8px;
         padding: 0.5em 1em;
+        transition: 0.2s;
+    }
+
+    .stButton>button:hover {
+        background-color: #6a6aff;
+        cursor: pointer;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    [data-testid="stSidebar"] {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+    }
+
+    [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+        font-family: 'Playfair Display', serif;
+        color: #ffffff;
+    }
+
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] .stText {
+        font-family: 'Manrope', sans-serif;
+        color: #c0c0c0;
+    }
+
+    /* ---------- DIVIDERS ---------- */
+    hr {
+        border: none;
+        border-top: 1px solid #444;
+        margin: 1.5em 0;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
