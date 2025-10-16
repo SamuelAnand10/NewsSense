@@ -1,21 +1,15 @@
+
 import streamlit as st
+from datetime import datetime
 from fetch_news import fetch_all_news
 from summarize import summarize_by_category
 from chatbot import answer_question
-from embeddings import refresh_vector_db, store_articles
-from datetime import datetime
+from embeddings import refresh_vector_db
 
-st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
+# -------------------- PAGE CONFIG --------------------
+st.set_page_config(page_title="📰 NewsSense", layout="wide", page_icon="🧠")
 
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
-
-if "summaries" not in st.session_state:
-    st.session_state.summaries = {}
-
-if "articles" not in st.session_state:
-    st.session_state.articles = []
-
+# -------------------- CUSTOM CSS --------------------
 st.markdown("""
 <style>
 body {
@@ -73,8 +67,9 @@ div[data-testid="stSidebar"] {
 </style>
 """, unsafe_allow_html=True)
 
+# -------------------- SIDEBAR --------------------
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Globe_icon.svg", width=80)
-st.sidebar.title("NewsSense")
+st.sidebar.title("🌍 NewsSense")
 st.sidebar.markdown("**Your Daily AI-Powered News Digest**")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### Options")
@@ -82,12 +77,25 @@ refresh_news = st.sidebar.button("🔄 Fetch Latest News")
 st.sidebar.markdown("### About")
 st.sidebar.info("Powered by advanced summarization and question-answering models to keep you informed.")
 
+# -------------------- SESSION STATE --------------------
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
-# Button to fetch news
-if st.button("Fetch Daily News"):
+if "summaries" not in st.session_state:
+    st.session_state.summaries = {}
+
+if "articles" not in st.session_state:
+    st.session_state.articles = []
+
+# -------------------- HEADER --------------------
+st.title("🧠 NewsSense — Daily News Summaries")
+st.caption("Stay informed with concise summaries and smart insights.")
+
+# -------------------- FETCH NEWS --------------------
+if refresh_news:
     with st.spinner("Fetching global news..."):
-        #articles = fetch_all_news()
-        category = "general"  # youst.session_state.articles can change per batch
+        # articles = fetch_all_news()  # Real API call
+        category = "general"
 
         st.session_state.articles = [
     {
@@ -137,26 +145,24 @@ if st.button("Fetch Daily News"):
     }
 ]
 
-
         st.info("Updating knowledge base...")
         refresh_vector_db(st.session_state.articles)
 
         with st.spinner("Summarizing news by category..."):
             st.session_state.summaries = summarize_by_category(st.session_state.articles)
 
-        st.success("Daily news summaries ready!")
+        st.success("✅ News updated successfully!")
 
-# --- Display summaries persistently ---
+# -------------------- DISPLAY SUMMARIES --------------------
 if st.session_state.summaries:
-    st.subheader("Today's Summaries")
+    st.subheader("🗂️ Today's Summaries")
 
     for category, summary in st.session_state.summaries.items():
         st.markdown(f"<div class='summary-card'><h4>{category.title()}</h4><p>{summary}</p></div>", unsafe_allow_html=True)
 else:
     st.info("Click **'Fetch Latest News'** in the sidebar to get today's summaries.")
 
-st.header("Ask Questions About the News")
-
+# -------------------- CHAT INTERFACE --------------------
 st.markdown("---")
 st.subheader("💬 Chat with NewsSense")
 
