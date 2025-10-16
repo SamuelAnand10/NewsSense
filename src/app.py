@@ -122,10 +122,10 @@ st.caption("Stay informed with concise summaries and smart insights.")
 # -------------------- FETCH NEWS --------------------
 if refresh_news:
     with st.spinner("Fetching global news..."):
-        # articles = fetch_all_news()  # Real API call
+        st.session_state.articles = fetch_all_news()  # Real API call
         category = "general"
 
-        st.session_state.articles = [
+        articles = [
     {
         "title": "Scientists Discover Chocolate Moon",
         "description": "A group of researchers claim they found evidence of a moon made entirely of chocolate orbiting a distant planet.",
