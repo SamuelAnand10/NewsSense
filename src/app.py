@@ -7,7 +7,7 @@ from chatbot import answer_question
 from embeddings import refresh_vector_db
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
+st.set_page_config(page_title="NewsSense", layout="wide", page_icon="📰")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown(
@@ -97,7 +97,7 @@ if "articles" not in st.session_state:
 # -------------------- HEADER --------------------
 st.markdown(
     """
-    <h1 class='app-title'>📰 NewsSense — Daily News Summaries</h1>
+    <h1 class='app-title'> NewsSense — Daily News Summaries</h1>
     <p class='app-caption'>Stay informed with concise summaries and smart insights.</p>
     """,
     unsafe_allow_html=True
