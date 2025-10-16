@@ -10,66 +10,40 @@ from embeddings import refresh_vector_db
 st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 # -------------------- CUSTOM CSS --------------------
+# -------------------- HEADER --------------------
+st.markdown(
+    """
+    <h1 class='app-title'>📰 NewsSense — Daily News Summaries</h1>
+    <p class='app-caption'>Stay informed with concise summaries and smart insights.</p>
+    """,
+    unsafe_allow_html=True
+)
+
+# CSS addition for caption
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:ital,wght@0,900&display=swap');
-
-    /* App Title / Headings */
-    .app-title {
-        font-family: 'Playfair Display';
-        font-weight: 900;  /* bold / black style */
-        letter-spacing: 1px;
-        color: #ffffff;
-        font-size: 3em;  /* increase as needed */
+    .app-caption {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 400;
+        font-size: 1.2em;
+        color: #d0d0d0;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
-    /* Body text */
-    html, body, [class*="css"] {
-        font-family: 'Manrope';
-        background-color: #1e1e1e;  /* dark mode */
-        color: #e0e0e0;
-    }
-
-    /* Chat bubbles */
-    .user-bubble {
-        background-color: #3a3a3a;
-        color: #f1f1f1;
-        padding: 12px;
-        border-radius: 15px;
-        margin-left: 50%;
-        text-align: right;
-        width: fit-content;
-        max-width: 45%;
-        font-family: 'Manrope';
-    }
-
-    .ai-bubble {
-        background-color: #2a2a72;
-        color: #f1f1f1;
-        padding: 12px;
-        border-radius: 15px;
-        margin-right: 50%;
-        text-align: left;
-        width: fit-content;
-        max-width: 45%;
-        font-family: 'Manrope';
-    }
-
-    /* Buttons */
-    .stButton>button {
-        background-color: #4a4aff;
-        color: #fff;
-        font-family: 'Manrope';
-        border-radius: 8px;
-        padding: 0.5em 1em;
+    /* Optional: Summary cards styling */
+    .summary-card {
+        background-color: #2a2a2a;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
