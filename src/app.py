@@ -15,19 +15,22 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:ital,wght@0,900&display=swap');
 
-    /* Default text font */
-    html, body, [class*="css"] {
-        font-family: 'Manrope', sans-serif;
-        background-color: #1e1e1e;  /* dark mode */
-        color: #e0e0e0;
-    }
-
     /* App Title / Headings */
-    h1, h2, h3 {
-        font-family: 'Playfair Display', serif;
+    .app-title {
+        font-family: 'Playfair Display';
         font-weight: 900;  /* bold / black style */
         letter-spacing: 1px;
         color: #ffffff;
+        font-size: 3em;  /* increase as needed */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Body text */
+    html, body, [class*="css"] {
+        font-family: 'Manrope';
+        background-color: #1e1e1e;  /* dark mode */
+        color: #e0e0e0;
     }
 
     /* Chat bubbles */
@@ -40,7 +43,7 @@ st.markdown(
         text-align: right;
         width: fit-content;
         max-width: 45%;
-        font-family: 'Manrope', sans-serif;
+        font-family: 'Manrope';
     }
 
     .ai-bubble {
@@ -52,14 +55,14 @@ st.markdown(
         text-align: left;
         width: fit-content;
         max-width: 45%;
-        font-family: 'Manrope', sans-serif;
+        font-family: 'Manrope';
     }
 
     /* Buttons */
     .stButton>button {
         background-color: #4a4aff;
         color: #fff;
-        font-family: 'Manrope', sans-serif;
+        font-family: 'Manrope';
         border-radius: 8px;
         padding: 0.5em 1em;
     }
@@ -67,7 +70,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 
 
