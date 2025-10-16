@@ -5,8 +5,7 @@ from chatbot import answer_question
 from embeddings import refresh_vector_db, store_articles
 from datetime import datetime
 
-st.set_page_config(page_title="NewsSense", layout="wide")
-st.title("📰 NewsSense — Daily News Summaries")
+st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -17,30 +16,72 @@ if "summaries" not in st.session_state:
 if "articles" not in st.session_state:
     st.session_state.articles = []
 
-st.markdown(
-    """
-    <style>
-    .user-bubble {
-        background-color: #a6f0c6;
-        padding: 10px;
-        border-radius: 15px;
-        margin-left: 50%;
-        text-align: right;
-        width: fit-content;
-        max-width: 45%;
-    }
-    .ai-bubble {
-        background-color: #a0c4ff;
-        padding: 10px;
-        border-radius: 15px;
-        margin-right: 50%;
-        text-align: left;
-        width: fit-content;
-        max-width: 45%;
-    }
-    </style>
-    """, unsafe_allow_html=True
-)
+st.markdown("""
+<style>
+body {
+    background-color: #f7f9fc;
+}
+
+h1, h2, h3 {
+    color: #1f2937;
+}
+
+section.main > div {
+    padding-top: 1rem;
+}
+
+div[data-testid="stSidebar"] {
+    background-color: #e9eff5;
+}
+
+.user-bubble {
+    background-color: #DCFCE7;
+    padding: 12px 16px;
+    border-radius: 20px;
+    margin: 5px 0 5px auto;
+    width: fit-content;
+    max-width: 60%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ai-bubble {
+    background-color: #E0E7FF;
+    padding: 12px 16px;
+    border-radius: 20px;
+    margin: 5px auto 5px 0;
+    width: fit-content;
+    max-width: 60%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.summary-card {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+[data-testid="stSpinner"] > div {
+    color: #2563EB;
+    font-weight: 500;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Globe_icon.svg", width=80)
+st.sidebar.title("NewsSense")
+st.sidebar.markdown("**Your Daily AI-Powered News Digest**")
+st.sidebar.markdown("---")
+st.sidebar.markdown("### Options")
+refresh_news = st.sidebar.button("🔄 Fetch Latest News")
+st.sidebar.markdown("### About")
+st.sidebar.info("Powered by advanced summarization and question-answering models to keep you informed.")
+
 
 # Button to fetch news
 if st.button("Fetch Daily News"):
@@ -97,47 +138,51 @@ if st.button("Fetch Daily News"):
 ]
 
 
-        st.info("Refreshing Vector DB...")
+        st.info("Updating knowledge base...")
         refresh_vector_db(st.session_state.articles)
 
         with st.spinner("Summarizing news by category..."):
             st.session_state.summaries = summarize_by_category(st.session_state.articles)
 
-        st.success("✅ Daily news summaries ready!")
+        st.success("Daily news summaries ready!")
 
 # --- Display summaries persistently ---
 if st.session_state.summaries:
-    st.header("🗂️ Daily News Summaries")
+    st.subheader("Today's Summaries")
+
     for category, summary in st.session_state.summaries.items():
-        with st.expander(f"{category.upper()}"):
-            st.write(summary)
+        st.markdown(f"<div class='summary-card'><h4>{category.title()}</h4><p>{summary}</p></div>", unsafe_allow_html=True)
+else:
+    st.info("Click **'Fetch Latest News'** in the sidebar to get today's summaries.")
 
+st.header("Ask Questions About the News")
 
-st.header("💬 Ask Questions About the News")
+st.markdown("---")
+st.subheader("💬 Chat with NewsSense")
 
-# Using a form for chat input
 with st.form("chat_form", clear_on_submit=True):
-    user_question = st.text_input("Enter your question here:")
-    submitted = st.form_submit_button("Send Question")
+    user_question = st.text_input("Ask a question about today's news:")
+    submitted = st.form_submit_button("Send")
 
     if submitted and user_question:
-        with st.spinner("Generating answer..."):
+        with st.spinner("Thinking..."):
             answer, sources = answer_question(user_question)
 
-        # Add both user and AI messages to chat history
-        st.session_state.chat_history.append({"role": "user", "message": user_question})
-        st.session_state.chat_history.append({"role": "ai", "message": answer, "sources": sources})
+        st.session_state.chat_history.append({
+            "role": "user", "message": user_question
+        })
+        st.session_state.chat_history.append({
+            "role": "ai", "message": answer, "sources": sources
+        })
 
-# --- Display chat messages ---
-st.header("🗨️ Chat Conversation")
-for chat in st.session_state.chat_history:
-    if chat["role"] == "user":
-        st.markdown(f'<div class="user-bubble">{chat["message"]}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div class="ai-bubble">{chat["message"]}</div>', unsafe_allow_html=True)
-        if "sources" in chat and chat["sources"]:
-            st.markdown("**Sources:**")
-            for s in chat["sources"]:
-                # Make the source name a clickable link
-                st.markdown(f"- [{s['title']}]({s.get('url', '#')}) by {s.get('source', 'Unknown')}")
-
+# -------------------- DISPLAY CHAT --------------------
+if st.session_state.chat_history:
+    for chat in st.session_state.chat_history:
+        if chat["role"] == "user":
+            st.markdown(f"<div class='user-bubble'>{chat['message']}</div>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<div class='ai-bubble'>{chat['message']}</div>", unsafe_allow_html=True)
+            if "sources" in chat and chat["sources"]:
+                st.markdown("**Sources:**")
+                for s in chat["sources"]:
+                    st.markdown(f"- [{s['title']}]({s.get('url', '#')}) — {s.get('source', 'Unknown')}")
