@@ -20,9 +20,6 @@ h1, h2, h3 {
     color: #1f2937;
 }
 
-h4, p {
-    color: #000000;}
-
 section.main > div {
     padding-top: 1rem;
 }
