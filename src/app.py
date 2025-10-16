@@ -11,19 +11,17 @@ st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* Global settings */
     html, body, [class*="css"] {
-        font-family: 'Inter', 'Poppins', sans-serif;
+        font-family: 'Manrope', sans-serif !important;
         background-color: #121212;
         color: #EAEAEA;
     }
 
-    /* Chat bubbles */
     .user-bubble {
-        background-color: #00ADB5;
+        background-color: #007AFF;
         color: white;
         padding: 10px 15px;
         border-radius: 16px;
@@ -33,7 +31,7 @@ st.markdown("""
         max-width: 60%;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         font-weight: 500;
-        letter-spacing: 0.2px;
+        letter-spacing: 0.1px;
     }
 
     .ai-bubble {
@@ -47,45 +45,40 @@ st.markdown("""
         max-width: 60%;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         font-weight: 400;
-        letter-spacing: 0.2px;
+        letter-spacing: 0.1px;
     }
 
-    /* Expander headers */
-    .streamlit-expanderHeader {
-        font-weight: 600 !important;
-        color: #00ADB5 !important;
-        font-family: 'Poppins', sans-serif !important;
-        letter-spacing: 0.5px;
+    h1, h2, h3, h4 {
+        font-family: 'Manrope', sans-serif !important;
+        font-weight: 600;
+        color: #FFFFFF;
+        letter-spacing: 0.4px;
     }
 
-    /* Buttons */
     div.stButton > button {
-        background-color: #00ADB5;
+        background-color: #007AFF;
         color: white;
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 0.6em 1.2em;
         font-weight: 600;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Manrope', sans-serif;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     div.stButton > button:hover {
-        background-color: #06D6A0;
-        color: #121212;
+        background-color: #409CFF;
         transform: translateY(-2px);
     }
 
-    /* Text inputs and text areas */
     textarea, input {
         background-color: #1E1E1E !important;
         color: #EAEAEA !important;
         border: 1px solid #333 !important;
         border-radius: 8px !important;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Manrope', sans-serif !important;
     }
 
-    /* Sidebar tweaks */
     section[data-testid="stSidebar"] {
         background-color: #1E1E1E;
     }
@@ -93,12 +86,10 @@ st.markdown("""
         color: #EAEAEA !important;
     }
 
-    /* Headings */
-    h1, h2, h3, h4 {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        color: #FFFFFF;
-        letter-spacing: 0.5px;
+    .streamlit-expanderHeader {
+        font-weight: 600 !important;
+        color: #007AFF !important;
+        font-family: 'Manrope', sans-serif !important;
     }
 </style>
 """, unsafe_allow_html=True)
