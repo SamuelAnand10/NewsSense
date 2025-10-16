@@ -11,61 +11,98 @@ st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-body {
-    background-color: #f7f9fc;
-}
+    /* Global settings */
+    html, body, [class*="css"] {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        background-color: #121212;
+        color: #EAEAEA;
+    }
 
-h1, h2, h3 {
-    color: #1f2937;
-}
+    /* Chat bubbles */
+    .user-bubble {
+        background-color: #00ADB5;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 16px;
+        margin-left: auto;
+        text-align: right;
+        width: fit-content;
+        max-width: 60%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        font-weight: 500;
+        letter-spacing: 0.2px;
+    }
 
-section.main > div {
-    padding-top: 1rem;
-}
+    .ai-bubble {
+        background-color: #1E1E1E;
+        color: #EAEAEA;
+        padding: 10px 15px;
+        border-radius: 16px;
+        margin-right: auto;
+        text-align: left;
+        width: fit-content;
+        max-width: 60%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        font-weight: 400;
+        letter-spacing: 0.2px;
+    }
 
-div[data-testid="stSidebar"] {
-    background-color: #e9eff5;
-}
+    /* Expander headers */
+    .streamlit-expanderHeader {
+        font-weight: 600 !important;
+        color: #00ADB5 !important;
+        font-family: 'Poppins', sans-serif !important;
+        letter-spacing: 0.5px;
+    }
 
-.user-bubble {
-    background-color: #DCFCE7;
-    padding: 12px 16px;
-    border-radius: 20px;
-    margin: 5px 0 5px auto;
-    width: fit-content;
-    max-width: 60%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+    /* Buttons */
+    div.stButton > button {
+        background-color: #00ADB5;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.6em 1.2em;
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-.ai-bubble {
-    background-color: #E0E7FF;
-    padding: 12px 16px;
-    border-radius: 20px;
-    margin: 5px auto 5px 0;
-    width: fit-content;
-    max-width: 60%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+    div.stButton > button:hover {
+        background-color: #06D6A0;
+        color: #121212;
+        transform: translateY(-2px);
+    }
 
-.summary-card {
-    background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
-}
-.summary-card:hover {
-    transform: translateY(-3px);
-}
+    /* Text inputs and text areas */
+    textarea, input {
+        background-color: #1E1E1E !important;
+        color: #EAEAEA !important;
+        border: 1px solid #333 !important;
+        border-radius: 8px !important;
+        font-family: 'Inter', sans-serif !important;
+    }
 
-[data-testid="stSpinner"] > div {
-    color: #2563EB;
-    font-weight: 500;
-}
+    /* Sidebar tweaks */
+    section[data-testid="stSidebar"] {
+        background-color: #1E1E1E;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #EAEAEA !important;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: #FFFFFF;
+        letter-spacing: 0.5px;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 # -------------------- SIDEBAR --------------------
 
