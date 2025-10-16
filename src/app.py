@@ -170,11 +170,12 @@ if "articles" not in st.session_state:
 # -------------------- HEADER --------------------
 st.markdown(
     """
-    <h1 class='app-title'> NewsSense — Daily News Summaries</h1>
+    <h1 class='app-title'>NewsSense — Daily News Summaries</h1>
     <p class='app-caption'>Stay informed with concise summaries and smart insights.</p>
     """,
     unsafe_allow_html=True
 )
+
 
 
 # -------------------- FETCH NEWS --------------------
