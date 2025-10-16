@@ -6,7 +6,7 @@ load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def answer_question(question: str, top_k: int = 1):
+def answer_question(question: str, top_k: int = 10):
     """
     1. Search Pinecone for relevant articles
     2. Build GPT prompt using full article metadata
