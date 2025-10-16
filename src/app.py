@@ -10,89 +10,69 @@ from embeddings import refresh_vector_db
 st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 # -------------------- CUSTOM CSS --------------------
-st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+st.markdown(
+    """
+    <style>
+    /* Import fonts from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
 
-<style>
-    html, body, [class*="css"] {
-        font-family: 'Manrope', sans-serif !important;
-        background-color: #121212;
-        color: #EAEAEA;
+    /* Set default font for the whole app */
+    html, body, [class*="css"]  {
+        font-family: 'Manrope', sans-serif;
+        background-color: #1e1e1e;  /* dark mode background */
+        color: #e0e0e0;  /* light text for dark mode */
     }
 
+    /* Headings (H1, H2, H3...) use Playfair Display */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        color: #ffffff;
+    }
+
+    /* Style chat bubbles */
     .user-bubble {
-        background-color: #007AFF;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 16px;
-        margin-left: auto;
+        background-color: #3a3a3a;
+        color: #f1f1f1;
+        padding: 12px;
+        border-radius: 15px;
+        margin-left: 50%;
         text-align: right;
         width: fit-content;
-        max-width: 60%;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        font-weight: 500;
-        letter-spacing: 0.1px;
+        max-width: 45%;
+        font-family: 'Manrope', sans-serif;
     }
 
     .ai-bubble {
-        background-color: #1E1E1E;
-        color: #EAEAEA;
-        padding: 10px 15px;
-        border-radius: 16px;
-        margin-right: auto;
+        background-color: #2a2a72;
+        color: #f1f1f1;
+        padding: 12px;
+        border-radius: 15px;
+        margin-right: 50%;
         text-align: left;
         width: fit-content;
-        max-width: 60%;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        font-weight: 400;
-        letter-spacing: 0.1px;
-    }
-
-    h1, h2, h3, h4 {
-        font-family: 'Manrope', sans-serif !important;
-        font-weight: 600;
-        color: #FFFFFF;
-        letter-spacing: 0.4px;
-    }
-
-    div.stButton > button {
-        background-color: #007AFF;
-        color: white;
-        border: none;
-        border-radius: 12px;
-        padding: 0.6em 1.2em;
-        font-weight: 600;
+        max-width: 45%;
         font-family: 'Manrope', sans-serif;
-        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    div.stButton > button:hover {
-        background-color: #409CFF;
-        transform: translateY(-2px);
-    }
-
-    textarea, input {
-        background-color: #1E1E1E !important;
-        color: #EAEAEA !important;
-        border: 1px solid #333 !important;
-        border-radius: 8px !important;
-        font-family: 'Manrope', sans-serif !important;
-    }
-
-    section[data-testid="stSidebar"] {
-        background-color: #1E1E1E;
-    }
-    section[data-testid="stSidebar"] * {
-        color: #EAEAEA !important;
-    }
-
+    /* Expander headers (for summaries) */
     .streamlit-expanderHeader {
-        font-weight: 600 !important;
-        color: #007AFF !important;
-        font-family: 'Manrope', sans-serif !important;
+        font-family: 'Playfair Display', serif;
+        color: #ffd700;  /* golden accent */
     }
-</style>
-""", unsafe_allow_html=True)
+
+    /* Buttons */
+    .stButton>button {
+        background-color: #4a4aff;
+        color: #fff;
+        font-family: 'Manrope', sans-serif;
+        border-radius: 8px;
+        padding: 0.5em 1em;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 # -------------------- SIDEBAR --------------------
@@ -124,54 +104,6 @@ if refresh_news:
     with st.spinner("Fetching global news..."):
         st.session_state.articles = fetch_all_news()  # Real API call
         category = "general"
-
-        articles = [
-    {
-        "title": "Scientists Discover Chocolate Moon",
-        "description": "A group of researchers claim they found evidence of a moon made entirely of chocolate orbiting a distant planet.",
-        "content": "In a shocking revelation, scientists from the Galactic Institute announced that a distant moon is composed entirely of chocolate. While evidence is still being verified, the news has gone viral.",
-        "url": "https://fake-news.com/chocolate-moon",
-        "source": "Galactic News",
-        "publishedAt": datetime.now().isoformat(),
-        "category": category
-    },
-    {
-        "title": "AI Predicts Next Year's Fashion Trends",
-        "description": "An AI system predicts neon colors will dominate the fashion scene next year.",
-        "content": "By analyzing millions of social media posts, AI TrendBot has predicted that neon colors will take over fashion runways next year, sparking excitement among designers.",
-        "url": "https://fake-news.com/ai-fashion-trends",
-        "source": "TechStyle",
-        "publishedAt": datetime.now().isoformat(),
-        "category": category
-    },
-    {
-        "title": "Flying Cars Approved in Europe",
-        "description": "The European Transportation Agency has approved regulations for flying cars in select cities.",
-        "content": "Europe is set to become the first continent to allow flying cars in urban areas by 2026, with strict safety regulations in place for operators.",
-        "url": "https://fake-news.com/flying-cars-europe",
-        "source": "Future Transport Daily",
-        "publishedAt": datetime.now().isoformat(),
-        "category": category
-    },
-    {
-        "title": "Cats Form Union to Demand Better Treats",
-        "description": "Domestic cats are allegedly organizing to demand higher-quality treats and longer nap times.",
-        "content": "Pet owners are surprised as cats across several households appear to be coordinating actions through social media to demand better treats and more frequent naps.",
-        "url": "https://fake-news.com/cat-union",
-        "source": "Feline Times",
-        "publishedAt": datetime.now().isoformat(),
-        "category": category
-    },
-    {
-        "title": "Time Travel Tourism Launches in 2030",
-        "description": "A tech startup claims to have created a safe time travel experience for tourists.",
-        "content": "ChronoTravel, a startup specializing in temporal tourism, announced its first commercial time travel tours starting in 2030. Interested tourists can book trips to the past or future.",
-        "url": "https://fake-news.com/time-travel-tourism",
-        "source": "Temporal News Network",
-        "publishedAt": datetime.now().isoformat(),
-        "category": category
-    }
-]
 
         st.info("Updating knowledge base...")
         refresh_vector_db(st.session_state.articles)
