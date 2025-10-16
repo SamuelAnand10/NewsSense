@@ -7,7 +7,7 @@ from chatbot import answer_question
 from embeddings import refresh_vector_db
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(page_title="📰 NewsSense", layout="wide", page_icon="🧠")
+st.set_page_config(page_title="NewsSense", layout="wide", page_icon="🧠")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown("""
@@ -68,8 +68,8 @@ div[data-testid="stSidebar"] {
 """, unsafe_allow_html=True)
 
 # -------------------- SIDEBAR --------------------
-st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Globe_icon.svg", width=80)
-st.sidebar.title("🌍 NewsSense")
+
+st.sidebar.title("NewsSense")
 st.sidebar.markdown("**Your Daily AI-Powered News Digest**")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### Options")
@@ -88,7 +88,7 @@ if "articles" not in st.session_state:
     st.session_state.articles = []
 
 # -------------------- HEADER --------------------
-st.title("🧠 NewsSense — Daily News Summaries")
+st.title("NewsSense — Daily News Summaries")
 st.caption("Stay informed with concise summaries and smart insights.")
 
 # -------------------- FETCH NEWS --------------------
@@ -151,11 +151,11 @@ if refresh_news:
         with st.spinner("Summarizing news by category..."):
             st.session_state.summaries = summarize_by_category(st.session_state.articles)
 
-        st.success("✅ News updated successfully!")
+        st.success("**News updated**")
 
 # -------------------- DISPLAY SUMMARIES --------------------
 if st.session_state.summaries:
-    st.subheader("🗂️ Today's Summaries")
+    st.subheader("Today's Summaries")
 
     for category, summary in st.session_state.summaries.items():
         st.markdown(f"<div class='summary-card'><h4>{category.title()}</h4><p>{summary}</p></div>", unsafe_allow_html=True)
@@ -164,7 +164,7 @@ else:
 
 # -------------------- CHAT INTERFACE --------------------
 st.markdown("---")
-st.subheader("💬 Chat with NewsSense")
+st.subheader("Chat with NewsSense")
 
 with st.form("chat_form", clear_on_submit=True):
     user_question = st.text_input("Ask a question about today's news:")
