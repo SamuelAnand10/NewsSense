@@ -138,6 +138,14 @@ st.markdown(
         border-top: 1px solid #444;
         margin: 1.5em 0;
     }
+
+    /* Title color switch for light mode */
+    @media (prefers-color-scheme: light) {
+        .app-title {
+            color: #000000 !important;  /* black title in light mode */
+        }
+    }
+    
     </style>
     """,
     unsafe_allow_html=True
