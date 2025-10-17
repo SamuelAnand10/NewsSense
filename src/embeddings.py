@@ -134,7 +134,7 @@ def search_articles(query: str, top_k: int = 10):
     )
 
     matches = []
-    for match in results['results'][0]['matches']:
+    for match in results['matches']:
         meta = match["metadata"]
         matches.append(meta)
     return matches
