@@ -80,7 +80,9 @@ def store_articles(articles: list, index):
     }
     """
 
-    existing_ids = set([item['id'] for item in index.describe_index_stats()['namespaces']['']['vector_count']])
+    existing_ids = set()
+    for record in index.list():
+        existing_ids.add(record.id)
 
     vectors = []
     print(f"Storing {len(articles)} articles...")
