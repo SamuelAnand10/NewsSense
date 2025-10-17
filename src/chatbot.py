@@ -13,6 +13,7 @@ def answer_question(question: str, top_k: int = 10):
     3. Return GPT's answer + list of articles used
     """
     results = search_articles(question, top_k=top_k)
+    print(len(results))
 
     if not results:
         return "Sorry, I couldn't find any relevant news articles.", []
