@@ -80,9 +80,8 @@ def store_articles(articles: list, index):
     }
     """
 
-    existing_ids = set()
-    for record in index.list():
-        existing_ids.add(record.id)
+    existing_ids = set([item['id'] for item in index.describe_index_stats()['namespaces']['']['vector_count']])
+
     vectors = []
     print(f"Storing {len(articles)} articles...")
     for article in articles:
@@ -127,13 +126,13 @@ def search_articles(query: str, top_k: int = 10):
     index = init_pinecone_index(reset=False)
     query_embedding = get_embedding(query)
     results = index.query(
-        vector=query_embedding,
+        vector=[query_embedding],
         top_k=top_k,
         include_metadata=True
     )
 
     matches = []
-    for match in results["matches"]:
+    for match in results['results'][0]['matches']:
         meta = match["metadata"]
         matches.append(meta)
     return matches
